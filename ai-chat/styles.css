@@ -17,6 +17,8 @@ body {
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
+  height: 80vh;
 }
 
 .chat-window {
@@ -26,6 +28,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 60px;
 }
 
 .chat-message {
@@ -50,6 +53,12 @@ body {
 .chat-input-container {
   display: flex;
   border-top: 1px solid #ddd;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 95%;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
