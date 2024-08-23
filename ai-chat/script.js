@@ -5,10 +5,26 @@ document.getElementById('send-btn').addEventListener('click', function() {
     addChatMessage(userInput, 'user-message');
     document.getElementById('user-input').value = '';
 
-    // Simulate bot response
-    setTimeout(function() {
-      addChatMessage('Hello there', 'bot-message');
-    }, 500);
+    const headers = {
+      'Authorization': 'Bearer MISTRAL_API_KEY',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    const data = {
+      model: 'open-mistral-nemo-2407',
+      messages: [{ role: 'user', content: userInput }],
+    };
+
+    axios.post('https://api.mistral.ai/v1/chat/completions', data, { headers: headers })
+      .then(response => {
+        console.log(response);
+        const content = response.data.choices[0].message.content;
+        addChatMessage(content, 'bot-message');
+      })
+      .catch(error => {
+        addChatMessage('Sorry, an error occured: ' + error, 'bot-message');
+      });
   }
 });
 
