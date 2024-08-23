@@ -4,6 +4,7 @@ document.getElementById('send-btn').addEventListener('click', function() {
   if (userInput !== '') {
     addChatMessage(userInput, 'user-message');
     document.getElementById('user-input').value = '';
+    showTypingIndicator();
 
     const headers = {
       'Authorization': 'Bearer MISTRAL_API_KEY',
@@ -18,11 +19,12 @@ document.getElementById('send-btn').addEventListener('click', function() {
 
     axios.post('https://api.mistral.ai/v1/chat/completions', data, { headers: headers })
       .then(response => {
-        console.log(response);
+        hideTypingIndicator();
         const content = response.data.choices[0].message.content;
         addChatMessage(content, 'bot-message');
       })
       .catch(error => {
+        hideTypingIndicator();
         addChatMessage('Sorry, an error occured: ' + error, 'bot-message');
       });
   }
@@ -37,4 +39,20 @@ function addChatMessage(message, messageType) {
 
   // Scroll to the bottom of the chat window
   chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const chatWindow = document.getElementById('chat-window');
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'chat-message bot-message typing-indicator';
+  chatWindow.appendChild(typingIndicator);
+
+  // Ensure typing indicator is visible
+  typingIndicator.style.display = 'block';
+}
+
+function hideTypingIndicator() {
+  const typingIndicator = document.querySelector('.typing-indicator');
+  typingIndicator.style.display = 'none';
+  typingIndicator.remove();
 }
