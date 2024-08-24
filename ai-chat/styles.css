@@ -39,6 +39,10 @@ body {
   background-color: lightpink;
   justify-content: center;
   align-items: center;
+  background-image: url('./assets/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .topic{
