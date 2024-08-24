@@ -1,8 +1,9 @@
 document.getElementById('send-btn').addEventListener('click', function() {
-  const userInput = document.getElementById('user-input').value.trim();
+  let userInput = document.getElementById('user-input').value.trim();
 
   if (userInput !== '') {
     addChatMessage(userInput, 'user-message');
+    userInput += '\nAnswer in a concise manner';
     document.getElementById('user-input').value = '';
     showTypingIndicator();
 
