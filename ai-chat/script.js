@@ -30,6 +30,13 @@ document.getElementById('send-btn').addEventListener('click', function() {
   }
 });
 
+document.getElementById("user-input").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent the default form submit behavior
+    document.getElementById("send-btn").click(); // Trigger the button click
+  }
+});
+
 function addChatMessage(message, messageType) {
   const chatWindow = document.getElementById('chat-window');
   const messageElement = document.createElement('div');
