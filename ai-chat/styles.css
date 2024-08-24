@@ -36,7 +36,7 @@ body {
   position:absolute;
   display: flex;
   top:10%;
-  background-color:pink;
+  background-color: lightpink;
   justify-content: center;
   align-items: center;
 }
